@@ -11,25 +11,27 @@ services:
     depends_on:
       - app
 
-  # Motor PHP 8.4 + Drivers PostgreSQL
+  # Motor PHP 8.5 + Drivers PostgreSQL
   app:
     build: .
     container_name: php_engine
     volumes:
       - ./src:/var/www/html
 
-  # Base de Datos (PostgreSQL 17)
+  # Base de Datos (MySQL 8.0)
   db:
-    image: postgres:17-alpine
-    container_name: postgres_db
+    image: mysql:8.0 # O la versión que prefieras
+    container_name: mysql_db
+    restart: always
     environment:
-      POSTGRES_USER: aalmonte
-      POSTGRES_PASSWORD: mosango0106
-      POSTGRES_DB: ecommerce_db
+      MYSQL_ROOT_PASSWORD: Mosango0106
+      MYSQL_DATABASE: ecommerce_db
+      MYSQL_USER: aalmonte
+      MYSQL_PASSWORD: mosango0106
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
 
 volumes:
-  pg_data:
+  mysql_data: # Cambiamos el nombre del volumen para evitar conflictos
