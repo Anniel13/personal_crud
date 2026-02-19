@@ -18,9 +18,9 @@ services:
     volumes:
       - ./src:/var/www/html
 
-  # Base de Datos (MySQL 8.0)
+  # Base de Datos (MySQL 8.4)
   db:
-    image: mysql:8.0 # O la versión que prefieras
+    image: mysql:8.4 
     container_name: mysql_db
     restart: always
     environment:
